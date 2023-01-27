@@ -1,14 +1,15 @@
 package com.flashcard.flashcard.model;
 
-import java.util.Date;
 import java.util.List;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.DocumentReference;
+
+import com.flashcard.flashcard.enums.Roles;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,15 +20,20 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(value = "folder")
-public class Folder {
+@Document(value = "user")
+public class User {
 	
 	@Id
 	private String id;
 	@NotBlank
 	private String name;
-	private List<Subject> subjects;
-	private Date creationDate;
-	@DBRef
-	private User user;
+	@NotBlank
+	private String userName;
+	@NotBlank
+	private String password;
+	@NotBlank
+	@Email
+	private String email;
+	@NotEmpty
+	private List<Roles> roles;
 }

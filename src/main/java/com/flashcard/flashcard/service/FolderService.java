@@ -1,5 +1,6 @@
 package com.flashcard.flashcard.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -19,12 +20,18 @@ public class FolderService {
 	public Folder createFolder(Folder folder) {		
 		this.validateFolder(folder);
 		
+		folder.setCreationDate(new Date());
+		
 		return repository.save(folder);
 	}
 
 	public Folder editFolder(Folder folder) {
 		this.validateFolder(folder);	
 		return repository.save(folder);
+	}
+	
+	public List<Folder> findAllByUserId(String userId){
+		return repository.findAllByUserId(userId);
 	}
 	
 	private void validateFolder(Folder folder) {
