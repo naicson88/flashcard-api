@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,6 +33,7 @@ public class FolderController {
 		return new ResponseEntity<>(created, HttpStatus.CREATED);
 	}
 	
+	@PreAuthorize("hasRole('USER')")
 	@GetMapping("/find-by-userid")
 	public ResponseEntity<List<Folder>> findAllByUserId(String userId){
 		return new ResponseEntity<>(service.findAllByUserId(userId), HttpStatus.OK);

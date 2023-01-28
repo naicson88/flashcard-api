@@ -29,5 +29,6 @@ public class Folder {
 	private List<Subject> subjects;
 	private Date creationDate;
 	@DBRef
+	@DocumentReference(lazy = true)
 	private User user;
 }

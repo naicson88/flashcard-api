@@ -11,7 +11,7 @@ import com.flashcard.flashcard.model.Folder;
 @Repository
 public interface FolderRepository extends MongoRepository<Folder, String>{
 
-	@Query(value="{user: ?0 }", count = true)	
+	@Query(value="{user: ?0 }", count = true)	// no banco { "user" : DBRef("user", ObjectId("63d3352b88b7f266250927aa")) }
 	List<Folder> findAllByUserId(String userId);
 
 }
