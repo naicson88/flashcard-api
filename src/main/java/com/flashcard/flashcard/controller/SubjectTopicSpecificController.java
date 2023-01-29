@@ -5,7 +5,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,29 +12,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.flashcard.flashcard.model.User;
-import com.flashcard.flashcard.service.UserService;
+import com.flashcard.flashcard.model.SubjectTopicSpecific;
+import com.flashcard.flashcard.service.SubjectTopicSpecificService;
 
 @RestController
-@RequestMapping({ "v1/user" })
+@RequestMapping({ "v1/specifc" })
 @CrossOrigin(origins = "*", maxAge = 3600)
 @Validated
-public class UserController {
+public class SubjectTopicSpecificController {
 	
 	@Autowired
-	private UserService userService;
+	SubjectTopicSpecificService service;
 	
-	@PostMapping("/create-user")
-	public ResponseEntity<User> createUser(@Valid @RequestBody User user){
-		
-		User savedUser = userService.createUser(user);
-		
-		return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
-	}
-	
-	
-	@PostMapping("/login")
-	public ResponseEntity<Boolean> doLogin(){
-		return new ResponseEntity<>(true, HttpStatus.OK);
+	//@PreAuthorize("hasRole('USER')")
+	@PostMapping("/create")
+	public ResponseEntity<SubjectTopicSpecific> create(@Valid @RequestBody SubjectTopicSpecific specific){
+		return new ResponseEntity<>(service.create(specific), HttpStatus.CREATED);
 	}
 }

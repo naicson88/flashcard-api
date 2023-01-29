@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,7 @@ import com.flashcard.flashcard.service.FolderService;
 @RestController
 @RequestMapping({ "v1/folder" })
 @CrossOrigin(origins = "*", maxAge = 3600)
+@Validated
 public class FolderController {
 	
 	@Autowired
@@ -33,7 +35,7 @@ public class FolderController {
 		return new ResponseEntity<>(created, HttpStatus.CREATED);
 	}
 	
-	@PreAuthorize("hasRole('USER')")
+	//@PreAuthorize("hasRole('USER')")
 	@GetMapping("/find-by-userid")
 	public ResponseEntity<List<Folder>> findAllByUserId(String userId){
 		return new ResponseEntity<>(service.findAllByUserId(userId), HttpStatus.OK);
