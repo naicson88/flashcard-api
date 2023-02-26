@@ -1,6 +1,5 @@
 package com.flashcard.flashcard.security;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,11 +13,13 @@ import com.flashcard.flashcard.model.User;
 public class UserPrincipal implements UserDetails{
 
 	private static final long serialVersionUID = 1L;
+	private String id;
 	private String username;
 	private String password;
 	private Collection<? extends GrantedAuthority> authorities;
 	
 	public UserPrincipal(User user) {
+		this.id = user.getId();
 		this.username = user.getUserName();
 		this.password = user.getPassword();
 		
@@ -66,6 +67,14 @@ public class UserPrincipal implements UserDetails{
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 }

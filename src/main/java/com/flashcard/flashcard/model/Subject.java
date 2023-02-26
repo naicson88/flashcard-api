@@ -12,6 +12,9 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,11 +31,13 @@ public class Subject {
 	private String id;
 	@NotBlank
 	private String name;
+	private String description;
 	private Date creationDate;
+	@DocumentReference()
 	private List<SubjectTopic> subjectTopics;
-	@DBRef
+	//@DBRef(db="folder")
+	@JsonBackReference
 	@DocumentReference()
 	@NotNull
-	private Folder folder;
-	
+	private Folder folder;	
 }

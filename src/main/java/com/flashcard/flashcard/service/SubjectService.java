@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.flashcard.flashcard.model.Folder;
 import com.flashcard.flashcard.model.Subject;
+import com.flashcard.flashcard.model.SubjectTopic;
 import com.flashcard.flashcard.repository.SubjectRepository;
 
 @Service
@@ -23,19 +24,12 @@ public class SubjectService {
 	}
 	
 	@Transactional
-	public Subject createSubject(Subject subject) throws Exception {
-		
-		Folder folder = folderService.findById(subject.getFolder().getId());
-		
+	public Subject createSubject(Subject subject) {
+			
 		subject.setCreationDate(new Date());
 		Subject savedSubject = repository.save(subject);
-		
-		if(folder.getSubjects() == null)
-			folder.setSubjects(List.of(subject));
-		else
-			folder.getSubjects().add(savedSubject);
-		
-		folderService.editFolder(folder);
+			
+		folderService.saveSubject(savedSubject);
 		
 		return savedSubject;
 	}
@@ -46,6 +40,19 @@ public class SubjectService {
 	
 	public Subject editSubject(Subject subject) {
 		return repository.save(subject);
+	}
+	
+	public Subject setSubjectTopic(SubjectTopic topicSaved) {
+		
+	Subject sub = this.findById(topicSaved.getSubject().getId());
+	
+		if(sub.getSubjectTopics() == null)
+			sub.setSubjectTopics(List.of(topicSaved));
+		else
+			sub.getSubjectTopics().add(topicSaved);
+		
+		return repository.save(sub);
+		
 	}
 	
 }

@@ -23,19 +23,11 @@ public class SubjectTopicService {
 	}
 	
 	@Transactional
-	public SubjectTopic create(SubjectTopic topic) {
-		
-	Subject sub = subjectService.findById(topic.getSubject().getId());
-		
+	public SubjectTopic create(SubjectTopic topic) {	
 		topic.setCreationDate(new Date());
 		SubjectTopic topicSaved =  repository.save(topic);
-		
-		if(sub.getSubjectTopics() == null)
-			sub.setSubjectTopics(List.of(topicSaved));
-		else
-			sub.getSubjectTopics().add(topicSaved);
-		
-		subjectService.editSubject(sub);
+	
+		subjectService.setSubjectTopic(topicSaved);
 		
 		return topicSaved;
 	}

@@ -11,6 +11,8 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,7 +30,7 @@ public class SubjectTopic {
 	@NotBlank
 	private String name;
 	private Date creationDate;
-	@DBRef
+	@JsonBackReference
 	@DocumentReference()
 	@NotNull
 	private Subject subject;

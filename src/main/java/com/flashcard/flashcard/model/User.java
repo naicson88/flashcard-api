@@ -36,4 +36,8 @@ public class User {
 	private String email;
 	@NotEmpty
 	private List<Roles> roles;
+	
+	public User(String id) {
+		this.id = id;
+	}
 }

@@ -10,6 +10,9 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,9 +29,14 @@ public class Folder {
 	private String id;
 	@NotBlank
 	private String name;
+	private String description;
+	//@DBRef
+	@JsonManagedReference
+	@DocumentReference(lazy = true)
 	private List<Subject> subjects;
 	private Date creationDate;
-	@DBRef
+	//@DBRef
 	@DocumentReference(lazy = true)
+	@JsonIgnore
 	private User user;
 }

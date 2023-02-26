@@ -25,7 +25,7 @@ public class SubjectController {
 	SubjectService service;
 	
 	@PostMapping("/create-subject")
-	public ResponseEntity<Subject> createSubject(@Valid @RequestBody Subject subject) throws Exception{
+	public ResponseEntity<Subject> createSubject(@Valid @RequestBody Subject subject) {
 		return new ResponseEntity<>(service.createSubject(subject), HttpStatus.CREATED);
 	}
 }

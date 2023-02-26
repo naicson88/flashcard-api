@@ -7,6 +7,7 @@ import com.flashcard.flashcard.model.Folder;
 public class FolderMock {
 	
 	public static Folder createFolder() {
-		return new Folder("id-test", "name", null, new Date(), null);
+		return new Folder("id-folder", "name", null, null, new Date(), null);
+		
 	}
 }
