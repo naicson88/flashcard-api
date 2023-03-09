@@ -7,9 +7,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.flashcard.flashcard.model.Subject;
@@ -28,4 +30,10 @@ public class SubjectController {
 	public ResponseEntity<Subject> createSubject(@Valid @RequestBody Subject subject) {
 		return new ResponseEntity<>(service.createSubject(subject), HttpStatus.CREATED);
 	}
+	
+	@GetMapping("/get-subject")
+	public ResponseEntity<Subject> findById(@RequestParam String subjectId){
+		return new ResponseEntity<>(service.findById(subjectId), HttpStatus.OK);
+	}
+	
 }

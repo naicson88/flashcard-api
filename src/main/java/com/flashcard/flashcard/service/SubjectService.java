@@ -42,17 +42,17 @@ public class SubjectService {
 		return repository.save(subject);
 	}
 	
-	public Subject setSubjectTopic(SubjectTopic topicSaved) {
-		
-	Subject sub = this.findById(topicSaved.getSubject().getId());
-	
-		if(sub.getSubjectTopics() == null)
-			sub.setSubjectTopics(List.of(topicSaved));
-		else
-			sub.getSubjectTopics().add(topicSaved);
-		
-		return repository.save(sub);
-		
-	}
+//	public Subject setSubjectTopic(SubjectTopic topicSaved) {
+//		
+//	Subject sub = this.findById(topicSaved.getSubject().getId());
+//	
+//		if(sub.getSubjectTopics() == null)
+//			sub.setSubjectTopics(List.of(topicSaved));
+//		else
+//			sub.getSubjectTopics().add(topicSaved);
+//		
+//		return repository.save(sub);
+//		
+//	}
 	
 }

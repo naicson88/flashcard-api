@@ -32,7 +32,7 @@ public class Folder {
 	private String description;
 	//@DBRef
 	@JsonManagedReference
-	@DocumentReference(lazy = true)
+	@DocumentReference(lazy = false)
 	private List<Subject> subjects;
 	private Date creationDate;
 	//@DBRef

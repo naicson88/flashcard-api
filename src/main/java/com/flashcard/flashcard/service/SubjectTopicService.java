@@ -26,8 +26,8 @@ public class SubjectTopicService {
 	public SubjectTopic create(SubjectTopic topic) {	
 		topic.setCreationDate(new Date());
 		SubjectTopic topicSaved =  repository.save(topic);
-	
-		subjectService.setSubjectTopic(topicSaved);
+//	
+//		subjectService.setSubjectTopic(topicSaved);
 		
 		return topicSaved;
 	}

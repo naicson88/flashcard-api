@@ -33,8 +33,9 @@ public class Subject {
 	private String name;
 	private String description;
 	private Date creationDate;
-	@DocumentReference()
-	private List<SubjectTopic> subjectTopics;
+	@DBRef()
+	@JsonManagedReference
+	private List<Card> listCards;
 	//@DBRef(db="folder")
 	@JsonBackReference
 	@DocumentReference()
