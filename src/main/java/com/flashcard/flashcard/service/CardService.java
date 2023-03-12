@@ -3,6 +3,7 @@ package com.flashcard.flashcard.service;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,18 +18,26 @@ public class CardService {
 	CardRepository cardRepository;
 	
 	@Autowired
-	SubjectService subjectService;
+	MongoTemplate template;
 	
 	@Transactional
 	public Card createCard(Card card) {
-		Subject sub = subjectService.findById(card.getSubject().getId());
-			
-			card.setCreationDate(new Date());
-			card = cardRepository.save(card);
-			sub.getListCards().add(card);
-			subjectService.editSubject(sub);
-			
-			return card;
+		Subject sub = template.findById(card.getSubject().getId(), Subject.class);
+		
+		if(sub == null)
+			throw new IllegalArgumentException("Subject with ID: " + card.getSubject().getId() + " not found!");
+		
+		card.setCreationDate(new Date());
+		card = cardRepository.save(card);
+		sub.getListCards().add(card);
 
+		template.save(sub);
+		
+		return card;
+	}
+	
+	@Transactional
+	public void deleteCard(String cardId) {
+		cardRepository.deleteById(cardId);
 	}
 }
