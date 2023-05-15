@@ -1,6 +1,9 @@
 package com.flashcard.flashcard.service;
 
 import java.util.Date;
+import java.util.NoSuchElementException;
+
+import javax.management.RuntimeErrorException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -38,6 +41,10 @@ public class CardService {
 	
 	@Transactional
 	public void deleteCard(String cardId) {
+		
+		if(cardRepository.findById(cardId).isEmpty())
+			throw new NoSuchElementException("Cannot find Card with ID: " + cardId);
+		
 		cardRepository.deleteById(cardId);
 	}
 }

@@ -7,9 +7,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.flashcard.flashcard.model.Card;
@@ -27,5 +29,11 @@ public class CardController {
 	@PostMapping("/create-card")
 	public ResponseEntity<Card> createCard(@Valid @RequestBody Card card){
 		return new ResponseEntity<>(cardService.createCard(card), HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/delete-card")
+	public ResponseEntity<String> deleteCard(@RequestParam String cardId) {
+		cardService.deleteCard(cardId);
+		return new ResponseEntity<>("Card deleted successfully!" , HttpStatus.OK);
 	}
 }
