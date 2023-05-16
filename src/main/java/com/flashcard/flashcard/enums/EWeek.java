@@ -2,5 +2,6 @@ package com.flashcard.flashcard.enums;
 
 public enum EWeek {
 	
-	MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY 
+	MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY;
+	
 }
