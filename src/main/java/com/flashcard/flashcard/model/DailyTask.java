@@ -20,6 +20,5 @@ public class DailyTask {
 	@Id
 	private String id = UUID.randomUUID().toString();
 	private EWeek day;
-	private List<String> tasks;
-	
+	private List<Task> tasks;
 }
