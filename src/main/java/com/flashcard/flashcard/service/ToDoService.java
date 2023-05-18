@@ -39,7 +39,11 @@ public class ToDoService {
 	}
 	
 	private boolean checkIfUserAlreadyHasToDoCreated() {
-		return this.getToDoByUserId() != null;
+		try {
+			return this.getToDoByUserId() != null;
+		} catch (Exception e) {
+			return false;
+		} 
 	}
 	
 	private void validTaskColor(List<DailyTask> dailyTasks) {	
@@ -88,5 +92,17 @@ public class ToDoService {
 		todo.getDailyTasks().get(index).getTasks().add(task);		
 		
 		return repository.save(todo);
+	}
+	
+	public ToDo removeTask(EWeek day, Integer index) {
+		if(day == null || index == null)
+			throw new IllegalArgumentException("Invalid Day or Index");
+		
+		ToDo todo = this.getToDoByUserId();
+		int dayIndex = EWeek.valueOf(day.toString()).ordinal();
+		
+		todo.getDailyTasks().get(dayIndex).getTasks().remove(index.intValue());
+		
+		return repository.save(todo);	
 	}
 }	

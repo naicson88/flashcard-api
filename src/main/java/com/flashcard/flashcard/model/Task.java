@@ -1,5 +1,7 @@
 package com.flashcard.flashcard.model;
 
+import java.util.UUID;
+
 import javax.validation.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
@@ -13,7 +15,10 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Task {
 	
+	private String id = UUID.randomUUID().toString();
 	private String name;
 	@NotBlank
 	private String classColor;
+	private String time;
+
 }

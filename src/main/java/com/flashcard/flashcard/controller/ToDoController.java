@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -44,6 +45,13 @@ public class ToDoController {
 	@PutMapping("/update-todo")
 	public ResponseEntity<ToDo> updateToDo(@RequestParam EWeek day, @RequestBody Task task){
 		ToDo todo = service.updateDailyTasks(day, task);
+		
+		return new ResponseEntity<>(todo, HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/remove-task")
+	public ResponseEntity<ToDo> removeTask(@RequestParam EWeek day, @RequestParam Integer index){
+		ToDo todo = service.removeTask(day, index);
 		
 		return new ResponseEntity<>(todo, HttpStatus.OK);
 	}
