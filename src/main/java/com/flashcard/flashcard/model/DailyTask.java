@@ -3,6 +3,8 @@ package com.flashcard.flashcard.model;
 import java.util.List;
 import java.util.UUID;
 
+import javax.validation.constraints.NotBlank;
+
 import org.springframework.data.annotation.Id;
 
 import com.flashcard.flashcard.enums.EWeek;

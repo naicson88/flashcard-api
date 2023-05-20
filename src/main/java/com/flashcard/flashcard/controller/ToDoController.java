@@ -1,5 +1,7 @@
 package com.flashcard.flashcard.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.flashcard.flashcard.enums.EWeek;
+import com.flashcard.flashcard.model.DailyTask;
 import com.flashcard.flashcard.model.Task;
 import com.flashcard.flashcard.model.ToDo;
 import com.flashcard.flashcard.service.ToDoService;
@@ -49,10 +52,18 @@ public class ToDoController {
 		return new ResponseEntity<>(todo, HttpStatus.OK);
 	}
 	
+	@PutMapping("/update-daily-tasks")
+	public ResponseEntity<ToDo> updateDailyTasks(@RequestBody @Valid List<DailyTask> dailyTasks){
+		ToDo todo = service.updateDailyTasks(dailyTasks);
+		
+		return new ResponseEntity<>(todo, HttpStatus.OK);
+	}
+	
 	@DeleteMapping("/remove-task")
 	public ResponseEntity<ToDo> removeTask(@RequestParam EWeek day, @RequestParam Integer index){
 		ToDo todo = service.removeTask(day, index);
 		
 		return new ResponseEntity<>(todo, HttpStatus.OK);
 	}
+	
 }

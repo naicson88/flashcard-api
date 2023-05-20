@@ -105,4 +105,12 @@ public class ToDoService {
 		
 		return repository.save(todo);	
 	}
+
+	public ToDo updateDailyTasks(List<DailyTask> dailyTasks) {
+		ToDo todo = this.getToDoByUserId();
+		
+		todo.setDailyTasks(dailyTasks);
+		
+		return repository.save(todo);
+	}
 }	
