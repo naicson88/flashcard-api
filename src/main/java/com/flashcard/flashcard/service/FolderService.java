@@ -15,6 +15,8 @@ import com.flashcard.flashcard.model.User;
 import com.flashcard.flashcard.repository.FolderRepository;
 import com.flashcard.flashcard.util.GeneralFunctions;
 
+import javax.validation.constraints.NotNull;
+
 @Service
 public class FolderService {
 
@@ -72,7 +74,7 @@ public class FolderService {
 	}
 	
 	@Transactional
-	public Folder saveSubject(Subject savedSubject) {
+	public Folder saveSubject(@NotNull Subject savedSubject) {
 		Folder folder = this.findById(savedSubject.getFolder().getId());
 		
 		if(folder.getSubjects() == null)

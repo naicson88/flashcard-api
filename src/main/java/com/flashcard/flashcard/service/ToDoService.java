@@ -56,9 +56,8 @@ public class ToDoService {
 	private ToDo insertAllDailyTasks(ToDo todo) {	
 		if(todo.getDailyTasks() == null)
 			todo.setDailyTasks(new ArrayList<>());
-		
+
 		validTaskColor(todo.getDailyTasks());
-		
 		List<EWeek> days = todo.getDailyTasks().stream().map(DailyTask::getDay).collect(Collectors.toList());
 		
 		for(EWeek day : EWeek.values()) {
@@ -67,8 +66,8 @@ public class ToDoService {
 			}			
 		}
 		
-		todo.setDailyTasks(todo.getDailyTasks().stream().sorted((d1, d2) -> d1.getDay().compareTo(d2.getDay())).toList());
-		
+		todo.setDailyTasks(todo.getDailyTasks().stream().sorted((d1, d2) -> d1.getDay().compareTo(d2.getDay())).collect(Collectors.toList()));
+
 		return todo;
 	}
 	
@@ -76,9 +75,7 @@ public class ToDoService {
 		return repository.findByUserId(GeneralFunctions.getUser().getId())
 				.orElseThrow(() -> new NoSuchElementException("ToDo not found for userId"));
 	}
-	
-	
-	
+
 	public ToDo updateDailyTasks(EWeek day, Task task) {
 		if(day == null || task == null)
 			throw new IllegalArgumentException("Invalid Day or Task informed!");

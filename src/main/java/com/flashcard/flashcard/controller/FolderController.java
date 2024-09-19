@@ -52,7 +52,7 @@ public class FolderController {
 	}
 	
 	@GetMapping("/find-by-id")
-	public ResponseEntity<Folder> findById(@RequestParam String folderId) throws Exception{
+	public ResponseEntity<Folder> findById(@RequestParam String folderId) throws Exception {
 		return new ResponseEntity<>(service.findById(folderId), HttpStatus.OK);
 	}
 	

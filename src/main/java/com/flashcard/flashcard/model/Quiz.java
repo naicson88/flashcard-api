@@ -1,11 +1,9 @@
 package com.flashcard.flashcard.model;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import java.util.Map;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -13,7 +11,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.flashcard.flashcard.enums.QuestionAnswer;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,20 +23,23 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(value = "subject")
-public class Subject {
+@Document(value = "folder")
+public class Quiz {
 	
 	@Id
 	private String id;
-	@NotBlank
-	private String name;
-	private String description;
-	private Date creationDate;
-	@DBRef(lazy = true)
-	@JsonManagedReference
-	private List<Card> listCards;
+	@DocumentReference(lazy = true)
+	@JsonIgnore
+	private User user;
+	@DBRef()
 	@JsonBackReference
-	@DocumentReference()
-	@NotNull
-	private Folder folder;	
+	private List<Card> nonAnsweredQuestions;
+	@DBRef()
+	@JsonBackReference
+	private List<Card> answeredQuestions;
+	private LocalDateTime startTime;
+	private LocalDateTime finishTime;
+	private Map<String, QuestionAnswer> questionResponse;
+	
+	
 }
