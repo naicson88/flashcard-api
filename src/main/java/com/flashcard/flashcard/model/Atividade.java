@@ -14,7 +14,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(value = "atividade")
 public class Atividade {
     @Id
-    private int id;
+    private String id;
     private String icon;
     private String activitie;
     private double value;

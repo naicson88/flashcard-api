@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
@@ -18,6 +19,7 @@ import java.util.List;
 public class ReceitaDespesa {
     @Id
     private String id;
+    @NotNull
     private String periodo;
     private List<Atividade> receitas;
     private List<Atividade> despesas;
