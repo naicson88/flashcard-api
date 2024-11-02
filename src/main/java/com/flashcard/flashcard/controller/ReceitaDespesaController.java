@@ -2,7 +2,6 @@ package com.flashcard.flashcard.controller;
 
 import com.flashcard.flashcard.model.ReceitaDespesa;
 import com.flashcard.flashcard.service.ReceitaDespesaService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
